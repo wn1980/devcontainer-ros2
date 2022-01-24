@@ -30,6 +30,8 @@ RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb
 RUN apt-get update --fix-missing && apt-get upgrade -y
 RUN apt-get install -y \
     ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-robot-state-publisher \
+    ros-${ROS_DISTRO}-joint-state-publisher \
     libpython3-dev \
     python3-pip \
     python3-colcon-common-extensions \
@@ -40,7 +42,8 @@ RUN apt-get install -y \
 
 # update pip and install some packages
 RUN curl https://bootstrap.pypa.io//get-pip.py | python3 - && \
-    pip install -U argcomplete
+    #pip install -U argcomplete \
+    echo "DONE"
 
 RUN rosdep init
 
