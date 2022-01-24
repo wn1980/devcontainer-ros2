@@ -1,0 +1,7 @@
+/.ros2_ws
+#/.vscode
+/build
+/devel
+/src
+/install
+/log
