@@ -52,14 +52,14 @@ RUN curl https://bootstrap.pypa.io//get-pip.py | python3 - && \
 
 RUN rosdep init
 
-RUN mkdir -p /workspace
+RUN mkdir -p /workspaces
 
 # setup user
 RUN useradd -m developer && \
     usermod -aG sudo developer && \
     usermod --shell /bin/bash developer && \
-    chown -R developer:developer /workspace && \
-    ln -sfn /workspace /home/developer/workspace && \
+    chown -R developer:developer /workspaces && \
+    ln -sfn /workspaces /home/developer/workspaces && \
     echo developer ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/developer && \
     chmod 0440 /etc/sudoers.d/developer
 

@@ -1,7 +1,7 @@
 {
 	"name": "ROS 2 Remote Container",
 	"image": "wn1980/ros2-devcontainer",
-	//"workspaceFolder": "/workspace",
+	//"workspaceFolder": "/workspaces/ros2-devcontainer",
 	"extensions": [
 		"ms-iot.vscode-ros"
 	],
