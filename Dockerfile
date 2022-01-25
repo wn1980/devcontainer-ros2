@@ -21,6 +21,7 @@ RUN apt-get install -y \
     sudo \
     nano \
     terminator \
+    evince \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -32,6 +33,7 @@ RUN apt-get update --fix-missing && apt-get upgrade -y
 RUN apt-get install -y \
     ros-${ROS_DISTRO}-xacro \
     ros-${ROS_DISTRO}-rviz2 \
+    ros-${ROS_DISTRO}-rqt-graph \
     ros-${ROS_DISTRO}-robot-state-publisher \
     ros-${ROS_DISTRO}-joint-state-publisher \
     ros-${ROS_DISTRO}-joint-state-publisher-gui \
