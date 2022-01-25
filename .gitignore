@@ -1,7 +1,6 @@
-#/ros2_ws
 #/.vscode
-/build
-/devel
 /src
+/build
 /install
 /log
+.vscode/browse.vc.*

@@ -20,6 +20,7 @@ RUN apt-get install -y \
     wget \
     sudo \
     nano \
+    terminator \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -30,8 +31,10 @@ RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb
 RUN apt-get update --fix-missing && apt-get upgrade -y
 RUN apt-get install -y \
     ros-${ROS_DISTRO}-xacro \
-    #ros-${ROS_DISTRO}-robot-state-publisher \
-    #ros-${ROS_DISTRO}-joint-state-publisher \
+    ros-${ROS_DISTRO}-rviz2 \
+    ros-${ROS_DISTRO}-robot-state-publisher \
+    ros-${ROS_DISTRO}-joint-state-publisher \
+    ros-${ROS_DISTRO}-joint-state-publisher-gui \
     libpython3-dev \
     python3-pip \
     python3-colcon-common-extensions \
@@ -42,7 +45,7 @@ RUN apt-get install -y \
 
 # update pip and install some packages
 RUN curl https://bootstrap.pypa.io//get-pip.py | python3 - && \
-    #pip install -U argcomplete \
+    pip install -U argcomplete \
     echo "DONE"
 
 RUN rosdep init
@@ -77,4 +80,5 @@ RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
 
 RUN echo "export PROMPT_COMMAND='history -a'" >> ~/.bashrc && \ 
     echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc && \
-    echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+    echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc \
+    echo "source /workspaces/ros2-devcontainer/install/setup.bash" >> ~/.bashrc 
