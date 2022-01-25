@@ -80,5 +80,5 @@ RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
 
 RUN echo "export PROMPT_COMMAND='history -a'" >> ~/.bashrc && \ 
     echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc && \
-    echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc \
+    echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
     echo "source /workspaces/ros2-devcontainer/install/setup.bash" >> ~/.bashrc 
