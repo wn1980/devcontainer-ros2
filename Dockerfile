@@ -37,6 +37,12 @@ RUN apt-get install -y \
     ros-${ROS_DISTRO}-robot-state-publisher \
     ros-${ROS_DISTRO}-joint-state-publisher \
     ros-${ROS_DISTRO}-joint-state-publisher-gui \
+    ros-${ROS_DISTRO}-slam-toolbox \
+    ros-${ROS_DISTRO}-nav2-bringup \
+    ros-${ROS_DISTRO}-turtlebot3-simulations \
+    ros-${ROS_DISTRO}-turtlebot3-teleop \
+    ros-${ROS_DISTRO}-turtlebot3-navigation2 \
+    ros-${ROS_DISTRO}-plotjuggler-ros \
     libpython3-dev \
     python3-pip \
     python3-colcon-common-extensions \
