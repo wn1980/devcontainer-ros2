@@ -1,6 +1,6 @@
-#/.vscode
+/.vscode
+.vscode/browse.vc.*
 /src
 /build
 /install
 /log
-.vscode/browse.vc.*
