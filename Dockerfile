@@ -1,4 +1,5 @@
-FROM ros:foxy-ros-core-focal
+#FROM ros:foxy-ros-core-focal
+FROM ros:humble-ros-base-jammy
 
 LABEL maintainer="Waipot Ngamsaad <waipotn@hotmail.com>"
 
@@ -42,6 +43,7 @@ RUN apt-get install -y \
     ros-${ROS_DISTRO}-turtlebot3-simulations \
     ros-${ROS_DISTRO}-turtlebot3-teleop \
     ros-${ROS_DISTRO}-turtlebot3-navigation2 \
+    ros-${ROS_DISTRO}-urdf-tutorial \
     ros-${ROS_DISTRO}-plotjuggler-ros \
     libpython3-dev \
     python3-pip \
@@ -56,7 +58,8 @@ RUN curl https://bootstrap.pypa.io//get-pip.py | python3 - && \
     pip install -U argcomplete \
     echo "DONE"
 
-RUN rosdep init
+RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && \
+    rosdep init
 
 RUN mkdir -p /workspaces
 
