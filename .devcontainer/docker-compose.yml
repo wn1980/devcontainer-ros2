@@ -1,8 +1,8 @@
 version: '3.8'
 
-volumes:
-  ros2_data:
-    external: true
+# volumes:
+#   ros2_data:
+#     external: true
 
 services:
 
