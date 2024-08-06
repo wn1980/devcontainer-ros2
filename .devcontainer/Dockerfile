@@ -50,6 +50,8 @@ RUN apt-get install -y \
     python3-pip \
     python3-colcon-common-extensions \
     python3-rosdep \
+    openscad \
+    meshlab \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -61,6 +63,12 @@ RUN curl https://bootstrap.pypa.io//get-pip.py | python3 - && \
 
 RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && \
     rosdep init
+
+# install Miniconda3
+RUN curl -L -o ~/condafile.sh -O https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh && \
+    bash ~/condafile.sh -b -p /opt/conda && \
+    rm ~/condafile.sh && \
+    /opt/conda/bin/conda update conda -y
 
 RUN mkdir -p /workspace
 
@@ -91,6 +99,22 @@ RUN rosdep fix-permissions && \
 RUN mkdir -p /workspace/src && \
     cd /workspace/src && \
     colcon build
+
+# set conda environment path
+ENV PATH /opt/conda/bin:$PATH
+
+RUN conda init bash && conda config --set auto_activate_base false
+
+# create specific conda env
+RUN conda create --name Onshape python
+
+SHELL ["conda", "run", "-n", "Onshape", "/bin/bash", "-c"]
+
+RUN pip install onshape-to-robot urdf2webots
+
+# clean
+RUN conda clean -ya && \
+    sudo apt-get -y autoremove
 
 # enable bash completion
 RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
