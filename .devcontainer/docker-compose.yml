@@ -13,9 +13,9 @@ services:
       dockerfile: Dockerfile
     container_name: ros2_devcontainer
     command: /bin/sh -c "while sleep 1000; do :; done"  
-    # user: "develpoer"
-    # volumes:
-    #   - $HOME/DEV/ros2_ws:/workspace:cached
+    volumes:
+      - $HOME/DEV/ros2_ws:/workspace:cached
+    # user: "developer"
     # depends_on:
     #     - mongodb
     # network_mode: service:mongodb

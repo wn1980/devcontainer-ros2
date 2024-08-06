@@ -88,7 +88,8 @@ RUN rosdep fix-permissions && \
     rosdep update
 
 # init ros2 workspace
-RUN mkdir -p src && \
+RUN mkdir -p /workspace/src && \
+    cd /workspace/src && \
     colcon build
 
 # enable bash completion
@@ -98,6 +99,6 @@ RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
 RUN echo "export PROMPT_COMMAND='history -a'" >> ~/.bashrc && \ 
     echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc && \
     echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
-    echo "source /workspace/ros2-devcontainer/install/setup.bash" >> ~/.bashrc && \
+    echo "source /workspace/install/setup.bash" >> ~/.bashrc && \
     echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc && \
     echo "DONE"
