@@ -1,5 +1,5 @@
 #FROM ros:foxy-ros-core-focal
-FROM ros:humble-ros-base-jammy
+FROM ros:humble-ros-core-jammy
 
 LABEL maintainer="Waipot Ngamsaad <waipotn@hotmail.com>"
 
@@ -32,6 +32,7 @@ RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb
 
 RUN apt-get update --fix-missing && apt-get upgrade -y
 RUN apt-get install -y \
+    ros-${ROS_DISTRO}-urdf \
     ros-${ROS_DISTRO}-xacro \
     ros-${ROS_DISTRO}-rviz2 \
     ros-${ROS_DISTRO}-rqt-graph \
@@ -61,14 +62,14 @@ RUN curl https://bootstrap.pypa.io//get-pip.py | python3 - && \
 RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && \
     rosdep init
 
-RUN mkdir -p /workspaces
+RUN mkdir -p /workspace
 
 # setup user
 RUN useradd -m developer && \
     usermod -aG sudo developer && \
     usermod --shell /bin/bash developer && \
-    chown -R developer:developer /workspaces && \
-    ln -sfn /workspaces /home/developer/workspaces && \
+    chown -R developer:developer /workspace && \
+    ln -sfn /workspace /home/developer/workspace && \
     echo developer ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/developer && \
     chmod 0440 /etc/sudoers.d/developer
 
@@ -83,7 +84,12 @@ USER $USER
 WORKDIR /home/developer
 
 # init rosdep
-RUN rosdep fix-permissions && rosdep update
+RUN rosdep fix-permissions && \
+    rosdep update
+
+# init ros2 workspace
+RUN mkdir -p src && \
+    colcon build
 
 # enable bash completion
 RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
@@ -92,6 +98,6 @@ RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
 RUN echo "export PROMPT_COMMAND='history -a'" >> ~/.bashrc && \ 
     echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc && \
     echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
-    echo "source /workspaces/ros2-devcontainer/install/setup.bash" >> ~/.bashrc && \
+    echo "source /workspace/ros2-devcontainer/install/setup.bash" >> ~/.bashrc && \
     echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc && \
     echo "DONE"

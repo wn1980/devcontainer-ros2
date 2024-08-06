@@ -1,0 +1,23 @@
+version: '3.8'
+
+volumes:
+  ros2_data:
+    external: true
+
+services:
+
+  ros2-devcontainer:
+    image: wn1980/ros2-devcontainer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ros2_devcontainer
+    command: /bin/sh -c "while sleep 1000; do :; done"  
+    # user: "develpoer"
+    # volumes:
+    #   - $HOME/DEV/ros2_ws:/workspace:cached
+    # depends_on:
+    #     - mongodb
+    # network_mode: service:mongodb
+    # ports:
+    #   - 5001:5001

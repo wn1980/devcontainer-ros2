@@ -1,15 +1,24 @@
 {
-	"name": "ROS 2 Remote Container",
-	"image": "wn1980/ros2-devcontainer",
-	//"workspaceFolder": "/workspaces/ros2-devcontainer",
-	"extensions": [
-		"ms-iot.vscode-ros"
-	],
-	"containerEnv": {
-        "DISPLAY": "unix:0"
-    },
-    "mounts": [
-        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
-      ],
-    "runArgs": ["--privileged"]
+	"name": "ROS2 DEV Container",
+	//"image": "wn1980/ros2-devcontainer",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "ros2-devcontainer",
+	"workspaceFolder": "/workspace",
+
+
+	"customizations": {
+		"vscode": {
+		  "extensions": [
+			"ms-iot.vscode-ros",
+		]
+		}
+	},
+
+	// "containerEnv": {
+    //     "DISPLAY": "unix:0"
+    // },
+    // "mounts": [
+    //     "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+    //   ],
+    // "runArgs": ["--privileged"]
 }
