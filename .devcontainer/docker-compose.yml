@@ -13,7 +13,11 @@ services:
       dockerfile: Dockerfile
     container_name: ros2_devcontainer
     command: /bin/sh -c "while sleep 1000; do :; done"  
+    privileged: true
+    devices:
+      - "/dev:/dev"
     volumes:
+      - /dev:/dev
       - $HOME/DEV/ros2_ws:/workspace:cached
     # user: "developer"
     # depends_on:
